@@ -1,1 +1,129 @@
+/* ==========================================================================
+   Cozy Coloring: custom styles
 
+   Layout, spacing, sizing, and shape all come from Bootstrap utility classes
+   in index.html. This file only holds:
+     1. Colors (the pastel rainbow palette)
+     2. Fonts
+     3. Bootstrap component colors that are hard-coded to blue
+     4. Two things no utility can do (scroll padding and hero height)
+   ========================================================================== */
+
+
+/* 1. COLORS ---------------------------------------------------------------
+   The pastel rainbow is mapped onto Bootstrap's theme colors, so utilities
+   like .bg-primary and .border-info use it automatically. Each color needs
+   its plain value AND an -rgb value (many utilities use the rgb one).
+   Pastels are light, so text stays dark. Avoid .text-primary and .text-bg-*
+   (white text on pastel is unreadable). Use .bg-* and let the text stay dark. */
+:root {
+  --bs-primary: #BDB2FF;   --bs-primary-rgb: 189, 178, 255;   /* lavender   */
+  --bs-secondary: #A0C4FF; --bs-secondary-rgb: 160, 196, 255; /* periwinkle */
+  --bs-success: #CAFFBF;   --bs-success-rgb: 202, 255, 191;   /* mint       */
+  --bs-info: #9BF6FF;      --bs-info-rgb: 155, 246, 255;      /* aqua       */
+  --bs-warning: #FDFFB6;   --bs-warning-rgb: 253, 255, 182;   /* butter     */
+  --bs-danger: #FFADAD;    --bs-danger-rgb: 255, 173, 173;    /* rose       */
+
+  /* Two pastels Bootstrap has no slot for (used by .bg-peach and .bg-blush) */
+  --cc-peach-rgb: 255, 214, 165;
+  --cc-blush-rgb: 255, 198, 255;
+
+  /* Text and page background */
+  --bs-body-color: #2B2D42;  --bs-body-color-rgb: 43, 45, 66;
+  --bs-body-bg: #FFFDF8;     --bs-body-bg-rgb: 255, 253, 248;
+
+  /* Links: a deeper lavender so they stay readable on the off-white page */
+  --bs-link-color-rgb: 107, 91, 200;
+  --bs-link-hover-color-rgb: 74, 60, 160;
+
+  /* Keyboard focus glow */
+  --bs-focus-ring-color: rgba(189, 178, 255, 0.5);
+}
+
+.bg-peach  { background-color: rgba(var(--cc-peach-rgb), var(--bs-bg-opacity, 1)); }
+.bg-blush  { background-color: rgba(var(--cc-blush-rgb), var(--bs-bg-opacity, 1)); }
+
+/* Thin rainbow strip under the navbar (height comes from the py-1 class) */
+.rainbow-bar {
+  background: linear-gradient(90deg, #FFADAD, #FFD6A5, #FDFFB6, #CAFFBF, #9BF6FF, #A0C4FF, #BDB2FF, #FFC6FF);
+}
+
+
+/* 2. FONTS ----------------------------------------------------------------
+   Nunito for body text, Fredoka for headings, brand, and buttons. */
+:root {
+  --bs-body-font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bs-body-font-size: 1.05rem;
+  --bs-body-line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.navbar-brand, .btn {
+  font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+}
+
+
+/* 3. COMPONENT COLORS -----------------------------------------------------
+   Bootstrap's buttons, pills, dropdowns, and accordion carry their own blue. These variables re-color them with the palette. */
+
+/* Buttons: dark text on lavender, slightly deeper on hover/press */
+.btn-primary {
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-color: var(--bs-body-color);
+  --bs-btn-hover-bg: #A99BFF;
+  --bs-btn-hover-border-color: #A99BFF;
+  --bs-btn-active-color: var(--bs-body-color);
+  --bs-btn-active-bg: #9887FF;
+  --bs-btn-active-border-color: #9887FF;
+  --bs-btn-focus-shadow-rgb: 189, 178, 255;
+  --bs-btn-disabled-color: var(--bs-body-color);
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+/* Shop tabs (pills) */
+.nav-pills {
+  --bs-nav-link-color: var(--bs-body-color);
+  --bs-nav-link-hover-color: var(--bs-body-color);
+  --bs-nav-pills-link-active-color: var(--bs-body-color);
+  --bs-nav-pills-link-active-bg: var(--bs-primary);
+}
+
+/* Navbar: the link Scrollspy marks as active (or an open dropdown) gets a lavender pill */
+#mainNav .nav-link.active,
+#mainNav .nav-link.show {
+  background-color: rgba(var(--bs-primary-rgb), 0.5);
+}
+
+/* Dropdown menu: active item in lavender instead of blue */
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: var(--bs-primary);
+  --bs-dropdown-link-active-color: var(--bs-body-color);
+}
+
+/* Accordion: open item in butter, lavender focus ring, dark arrow icon */
+.accordion {
+  --bs-accordion-active-color: var(--bs-body-color);
+  --bs-accordion-active-bg: rgba(var(--bs-warning-rgb), 0.6);
+  --bs-accordion-btn-focus-border-color: var(--bs-primary);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.5);
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232B2D42'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+
+/* 4. NON-COLOR CSS THAT UTILITIES CAN'T DO ---------------------------------
+   Explain these in the README write-up. */
+
+/* The header is sticky, so jump links would land with headings hidden under it */
+html {
+  scroll-padding-top: 6rem;
+}
+
+/* Bootstrap only has min-vh-100 (full screen), which is too tall for the hero.
+   A minimum height also stops the page from jumping when slides change. */
+.hero-slide {
+  min-height: 65vh;
+}
